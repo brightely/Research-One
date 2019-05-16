@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CSHR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+            <ui:define name="body">
+                <section class="content-header">
+                    <h1>
+                        Faculty Form
+                    </h1>
+                    <!--<ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                        <li class="active">Here</li>
+                    </ol>-->
+                </section>
+
+                <section class="content" style="padding-top: 50px">
+
+                    <div class="tab-content">
+                        <ul class="nav nav-tabs tabs-orange justify-content-end" id="myClassicTabOrange" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab" href="#profile-classic-orange"
+                                   role="tab" aria-controls="profile-classic-orange" aria-selected="true">Add Faculty </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-light" id="contact-tab-classic-orange" data-toggle="tab" href="#contact-classic-orange"
+                                   role="tab" aria-controls="contact-classic-orange" aria-selected="false">View Faculties</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content card" id="myClassicTabContentOrange">
+                            <div class="active tab-pane border-left-warning border-0" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"> Add Faculty </h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <h:form>
+                                            <div class="row">
+                                                <p:messages id="messages"/>
+                                                <br/>
+                                                <div class="col-md-4">
+                                                    <h:panelGrid class="panel col-md-9" columns="1">
+                                                        <div class="form-group">
+                                                            <!--<label class="form-control-label">Faculty Id</label>
+                                                            <h:inputText class="form-control" id="facid" value=""/> -->
+                                                            <label class="form-control-label">Faculty Name</label>
+                                                            <h:inputText class="form-control form-control-alternative" id="fname1" value="#{facultyController.faculty.fname}"/>
+                                                        </div>
+                                                        <br/>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <h:commandButton action="#{facultyController.createFaculty()}" class="form-control col-md-5 btn btn-sm btn-primary" value="Add"/>
+                                                            </div>
+                                                        </div>
+                                                    </h:panelGrid> 
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade card border-left-warning border-0" id="contact-classic-orange" role="tabpanel" aria-labelledby="contact-tab-classic-orange">
+                                <br/><br/>
+                                <div class="container">
+                                    <div class="small table-responsive">
+                                        <table class="table table-bordered table-striped" id="facultytable" cellspacing="0" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Faculty Id</th>
+                                                    <th>Faculty Name</th>
+                                                </tr>  
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="#{facultyController.faculties}" var="list">
+                                                    <tr>
+                                                        <td>#{list.uuid}</td>
+                                                        <td>#{list.fname}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    $(function () {
+                        $('#facultytable').DataTable({
+                            'paging': true,
+                            'lengthChange': false,
+                            'searching': false,
+                            'ordering': true,
+                            'info': true,
+                            'autoWidth': false
+                        });
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CHSR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+            <ui:define name="body">
+                <section class="content-header">
+                    <h1>
+                        Department Form
+                    </h1>
+                    <!--<ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                        <li class="active">Here</li>
+                    </ol>-->
+                </section>
+
+                <section class="content" style="padding-top: 50px">
+
+                    <div class="tab-content">
+                        <ul class="nav nav-tabs tabs-orange justify-content-end" id="myClassicTabOrange" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab" href="#profile-classic-orange"
+                                   role="tab" aria-controls="profile-classic-orange" aria-selected="true">Add Department</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-light" id="contact-tab-classic-orange" data-toggle="tab" href="#contact-classic-orange"
+                                   role="tab" aria-controls="contact-classic-orange" aria-selected="false">View Departments</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content card" id="myClassicTabContentOrange">
+                            <div class="active tab-pane border-left-warning border-0" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"> Add Department</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <h:form>
+                                            <div class="row">
+                                                <p:messages id="messages"/>
+                                                <br/><br/>
+                                                <div class="col-md-4">
+                                                    <h:panelGrid class="panel col-md-9" columns="1">
+                                                        <div class="form-group">
+                                                            <!--  <label class="form-control-label">Department Id</label>
+                                                              <h:inputText class="form-control" id="Depid" value=""/> -->
+                                                            <label class="form-control-label">Department Name</label>
+                                                            <h:inputText class="form-control form-control-alternative" id="dname1" value="#{departmentController.department.dname}"/>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Faculty</label>
+                                                                <h:selectOneMenu class="form-control form-control-alternative" id="faculty1" value="#{departmentController.facultyId}">
+                                                                    <f:selectItem itemLabel="Select Faculty"/>
+                                                                    <f:selectItems value="#{departmentController.faculties}" var="fac" itemValue="#{fac.uuid}" itemLabel="#{fac.fname}"/>
+                                                                </h:selectOneMenu> 
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <h:commandButton action="#{departmentController.createDepartment()}" class="form-control col-md-5 btn btn-sm btn-primary" value="Add"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </h:panelGrid> 
+
+                                                </div>
+                                            </div>
+
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade card border-left-warning border-0" id="contact-classic-orange" role="tabpanel" aria-labelledby="contact-tab-classic-orange">
+                                <br/><br/>
+                                <div class="container">
+                                    <div class="small table-responsive">
+                                        <table class="table table-bordered table-striped" id="departmenttable" cellspacing="0" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Department Id</th>
+                                                    <th>Department Name</th>
+                                                    <th>Faculty </th>
+
+                                                </tr>  
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="#{departmentController.departments}" var="list">
+                                                    <tr>
+                                                        <td>#{list.uuid}</td>
+                                                        <td>#{list.dname}</td>
+                                                        <td>#{list.faculty}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    $(function () {
+                        $('#departmenttable').DataTable({
+                            'paging': true,
+                            'lengthChange': false,
+                            'searching': false,
+                            'ordering': true,
+                            'info': true,
+                            'autoWidth': false
+                        });
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

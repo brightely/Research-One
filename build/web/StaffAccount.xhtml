@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CSHR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+            <ui:define name="body">
+                <section class="content-header">
+                    <h1>
+                        Staff Form
+                    </h1>
+                    <!--<ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                        <li class="active">Here</li>
+                    </ol>-->
+                </section>
+
+                <section class="content" style="padding-top: 50px">
+
+                    <div class="tab-content">
+                        <ul class="nav nav-tabs tabs-orange justify-content-end" id="myClassicTabOrange" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab" href="#profile-classic-orange"
+                                   role="tab" aria-controls="profile-classic-orange" aria-selected="true">Add Staff Member</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-light" id="contact-tab-classic-orange" data-toggle="tab" href="#contact-classic-orange"
+                                   role="tab" aria-controls="contact-classic-orange" aria-selected="false">View Staff Members</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content card" id="myClassicTabContentOrange">
+                            <div class="active tab-pane border-left-warning border-0" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Staff Member Information</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <h:form>
+                                            <div class="row">
+                                                <p:messages id="messages"/>
+                                                <br/><br/>
+                                                <div class="col-md-4">
+                                                    <h:panelGrid class="panel col-md-9" columns="1">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">Staff Id</label>
+                                                            <h:inputText class="form-control" id="studentid" value="#{staffController.id}" />
+                                                            <label class="form-control-label">First Name</label>
+                                                            <h:inputText class="form-control form-control-alternative" id="fname" value="#{staffController.firstName}"/>
+                                                            <label class="form-control-label">Last Name</label>
+                                                            <h:inputText class="form-control form-control-alternative" id="lname" value="#{staffController.lastName}" />
+                                                            <label class="form-control-label">Email</label>
+                                                            <h:inputText class="form-control form-control-alternative" id="email" value="#{staffController.email}"/>
+                                                            <label class="form-control-label">Address</label>
+                                                            <h:inputText class="form-control form-control-alternative" id="address" value="#{staffController.address}"/>
+                                                            <label class="form-control-label">Gender</label>
+                                                            <h:selectOneMenu class="form-control form-control-alternative" id="gendertype" value="#{staffController.gender}">
+                                                                <f:selectItem itemLabel="Select Gender"/>
+                                                                <f:selectItems value="#{staffController.genders}" />
+                                                            </h:selectOneMenu>
+                                                            <label class="form-control-label">Staff Type</label>
+                                                            <h:selectOneMenu class="form-control staffType form-control-alternative" id="academtype" value="#{staffController.type}">
+                                                                <f:selectItem itemLabel="Academic / Administrative"/>
+                                                                <f:selectItems value="#{staffController.types}" />
+                                                                <f:ajax listener="#{staffController.isAcademic()}"  />
+                                                            </h:selectOneMenu>
+                                                           
+                                                            <h:panelGroup id="faculty" class="faculty" style="display: none;">
+                                                                <label class="form-control-label">Faculty</label>
+                                                                <h:selectOneMenu class="form-control form-control-alternative" value="#{staffController.facultyId}">
+                                                                    <f:selectItem itemLabel="Select Faculty"/>
+                                                                    <f:selectItems value="#{staffController.faculties}" var="#{f}" itemValue="#{f.uuid}" itemLabel="#{f.fname}" />
+                                                                </h:selectOneMenu>
+                                                            
+                                                                <label class="form-control-label">Department</label>
+                                                                <h:selectOneMenu class="form-control form-control-alternative" value="#{staffController.departmentId}">
+                                                                    <f:selectItem itemLabel="Select Department"/>
+                                                                    <f:selectItems value="#{staffController.departments}" var="d" itemValue="#{d.uuid}" itemLabel="#{d.dname}" />
+                                                                </h:selectOneMenu>
+                                                            </h:panelGroup>
+                                                            <label class="form-control-label">Position</label>
+                                                            <h:selectOneMenu class="form-control form-control-alternative" value="#{staffController.position}">
+                                                                <f:selectItem itemLabel="Select Position"/>
+                                                                <f:selectItems value="#{staffController.positions}" />
+                                                            </h:selectOneMenu>
+                                                        </div>
+                                                    </h:panelGrid>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h:commandButton action="#{staffController.register()}" class="form-control col-md-5 btn btn-sm btn-primary" value="Save"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade card border-left-warning border-0" id="contact-classic-orange" role="tabpanel" aria-labelledby="contact-tab-classic-orange">
+                                <br/><br/>
+                                <div class="container">
+                                    <div class="small table-responsive">
+                                        <table class="table table-bordered table-striped" id="stafftable" cellspacing="0" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Staff Member Id</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Address</th>
+                                                    <th>Email</th>
+                                                    <th>Gender</th>
+                                                    <th>Position</th>
+
+                                                </tr>  
+                                            </thead>
+                                            <tbody>
+                                               <!-- <c:forEach items="" var="list"> -->
+                                                    <tr>
+                                                        <td>#{list.staff_Id}</td>
+                                                        <td>#{list.firstname}</td>
+                                                        <td>#{list.lastname}</td>
+                                                        <td>#{list.address}</td>
+                                                        <td>#{list.email}</td>
+                                                        <td>#{list.genderType}</td>
+
+                                                    </tr>
+                                               <!-- </c:forEach> -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <script src="jquery.min.js"/>
+                <script>
+                   
+                   $(".staffType").change(function(){
+                       var out=$(this).val();
+                       console.log(out);
+                       if(out==='ADMINISTRATIVE'){
+                           $(".faculty").hide();
+                       }else{
+                           $(".faculty").show();
+                       }
+                   });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

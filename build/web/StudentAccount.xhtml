@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CSHR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+            <ui:define name="body">
+                <section class="content-header">
+                    <h1>
+                        Student Form
+                    </h1>
+                    <!--<ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                        <li class="active">Here</li>
+                    </ol>-->
+                </section>
+
+                <section class="content" style="padding-top: 50px">
+
+                    <div class="tab-content">
+                        <ul class="nav nav-tabs tabs-orange justify-content-end" id="myClassicTabOrange" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab" href="#profile-classic-orange"
+                                   role="tab" aria-controls="profile-classic-orange" aria-selected="true">Add Student</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-light" id="contact-tab-classic-orange" data-toggle="tab" href="#contact-classic-orange"
+                                   role="tab" aria-controls="contact-classic-orange" aria-selected="false">View Students</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content card" id="myClassicTabContentOrange">
+                            <div class="active tab-pane border-left-warning border-0" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Student Information</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <h:form>
+                                            <div class="row">
+                                                <p:messages id="messages"/>
+                                                <br/>
+                                                <div class="col-md-4">
+                                                    <h:panelGrid class="panel col-md-9" columns="1">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Student Id</label>
+                                                                <h:inputText class="form-control" id="studentid"  value="#{studentController.student_id}" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">First Name</label>
+                                                                <h:inputText class="form-control form-control-alternative" id="fname" value="#{studentController.student.firstName}"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Last Name</label>
+                                                                <h:inputText class="form-control form-control-alternative" id="lname" value="#{studentController.student.lastName}" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Email</label>
+                                                                <h:inputText class="form-control form-control-alternative" id="email" value="#{studentController.student.email}"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Address</label>
+                                                                <h:inputText class="form-control form-control-alternative" id="address" value="#{studentController.student.address}"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Gender</label>
+                                                                  
+                                                                <h:selectOneMenu class="form-control form-control-alternative" id="gendertype" value="#{studentController.gender}">
+                                                                    <f:selectItem itemLabel="Select Gender"/>
+                                                                    <f:selectItems value="#{studentController.genders}" />
+                                                                </h:selectOneMenu> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Faculty</label>
+                                                                <h:selectOneMenu class="form-control " value="#{studentController.facultyId}">
+                                                                    <f:selectItem itemLabel="Select Faculty"/>
+                                                                    <f:selectItems value="#{studentController.faculties}" var="#{f}" itemValue="#{f.uuid}" itemLabel="#{f.fname}" />
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Department</label>
+                                                                <h:selectOneMenu class="form-control form-control-alternative" id="department" value="#{studentController.departmentId}">
+                                                                    <f:selectItem itemLabel="Select Department"/>
+                                                                    <f:selectItems value="#{studentController.departments}" var="dep" itemValue="#{dep.uuid}" itemLabel="#{dep.dname}"/>
+                                                                </h:selectOneMenu> 
+                                                            </div>
+                                                        </div>
+                                                    </h:panelGrid>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h:commandButton action="#{studentController.createstudent()}" class="form-control col-md-5 btn btn-sm btn-primary" value="Save"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade card border-left-warning border-0" id="contact-classic-orange" role="tabpanel" aria-labelledby="contact-tab-classic-orange">
+                                <br/>
+                                <div class="container">
+                                    <div class="small table-responsive">
+                                        <table class="table table-bordered table-striped" id="studenttable" cellspacing="0" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Student Id</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Address</th>
+                                                    <th>Email</th>
+                                                    <th>Gender</th>
+                                                    <!--<th>Faculty</th> -->
+                                                    <th>Department</th>
+                                                </tr>  
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="#{studentController.students}" var="list">
+                                                    <tr>
+                                                        <td>#{list.personId}</td>
+                                                        <td>#{list.firstName}</td>
+                                                        <td>#{list.lastName}</td>
+                                                        <td>#{list.address}</td>
+                                                        <td>#{list.email}</td>
+                                                        <td>#{list.gender}</td>
+                                                        <td>#{list.department}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--   <script>
+                        $(function () {
+                            $('#studenttable').DataTable({
+                                'paging': true,
+                                'lengthChange': false,
+                                'searching': false,
+                                'ordering': true,
+                                'info': true,
+                                'autoWidth': false
+                            });
+                        });
+                    </script>  -->
+                <script>
+
+                    $(document).ready(function () {
+                        $('#studenttable').DataTable();
+                    });
+                </script>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
